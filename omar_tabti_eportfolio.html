@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Omar Tabti | e-Portfolio</title>
+<meta name="description" content="e-Portfolio of Omar Tabti, engineering student in Digital Sciences at ENSEEIHT (Toulouse INP): numerical modelling, optimisation, HPC and AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F5FA; --ink:#151B33; --muted:#4A5270; --line:#CBD3E4; --grid:#E1E7F2;
+  --blue:#1B45B8; --mag:#B8265F; --soft:#E6ECF8;
+  --serif:'Source Serif 4',Georgia,serif; --sans:'Hanken Grotesk',system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --paper:#0E1224; --ink:#E9ECF6; --muted:#A4ACC8; --line:#2A3152; --grid:#171D38;
+  --blue:#8BA6FF; --mag:#FF86B1; --soft:#171D38;
+}}
+*{box-sizing:border-box}
+html{scroll-padding-top:5rem}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1rem/1.65 var(--sans);-webkit-font-smoothing:antialiased;
+  padding-top:env(safe-area-inset-top,0px)}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--mag);outline-offset:3px;border-radius:2px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.15;margin:0}
+h2{font-size:1.75rem;margin-bottom:.4rem}
+h3{font-size:1.15rem}
+p{margin:0 0 1rem;max-width:68ch}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.5rem}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.top .wrap{display:flex;align-items:center;gap:2rem;flex-wrap:wrap;padding-top:.7rem}
+.mark{font:600 1.35rem var(--serif);text-decoration:none;color:var(--ink);white-space:nowrap}
+.mark small{display:block;font:400 .78rem var(--sans);color:var(--muted)}
+nav[role=tablist]{display:flex;gap:1.4rem;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+nav::-webkit-scrollbar{display:none}
+nav button{all:unset;cursor:pointer;white-space:nowrap;padding:.9rem 0 .8rem;font:500 .92rem var(--sans);color:var(--muted);border-bottom:3px solid transparent}
+nav button:hover{color:var(--ink)}
+nav button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--mag)}
+nav button:focus-visible{outline:3px solid var(--mag);outline-offset:-2px}
+
+main{padding:3rem 0 4rem}
+[role=tabpanel][hidden]{display:none}
+.lead{color:var(--muted);font-size:1.05rem;max-width:62ch}
+.stack>*+*{margin-top:3rem}
+.cols{display:grid;gap:2.5rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
+.rule{border-top:1px solid var(--line);padding-top:1.5rem}
+.meta{font-size:.85rem;color:var(--muted)}
+.sdg{display:inline-flex;align-items:center;justify-content:center;min-width:1.7rem;height:1.7rem;padding:0 .35rem;border-radius:3px;
+  color:#fff;font:700 .8rem var(--sans);margin-right:.4rem}
+
+/* hero */
+.hero{display:grid;gap:3rem;grid-template-columns:repeat(auto-fit,minmax(20rem,1fr));align-items:center;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:28px 28px;border:1px solid var(--line);padding:2.5rem}
+.hero h1{font-size:clamp(2.2rem,5.2vw,3.5rem);letter-spacing:-.01em;margin-bottom:1.2rem}
+.cta{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.5rem}
+.btn{display:inline-block;padding:.7rem 1.2rem;border:1.5px solid var(--ink);color:var(--ink);text-decoration:none;font-weight:500;font-size:.93rem;background:transparent;cursor:pointer;font-family:var(--sans)}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn.main{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.main:hover{filter:brightness(1.12);background:var(--blue);color:#fff}
+@media (prefers-color-scheme:dark){.btn.main{color:#0E1224}.btn.main:hover{color:#0E1224}}
+figure{margin:0}
+figcaption{font-size:.82rem;color:var(--muted);margin-top:.5rem;max-width:44ch}
+#pv{width:100%;height:auto;cursor:pointer;display:block}
+#pv text{font:500 12px var(--sans);fill:var(--muted)}
+#pv .ax{stroke:var(--ink);stroke-width:1.5;fill:none}
+#pv .tick{stroke:var(--line);stroke-width:1;stroke-dasharray:3 4}
+#pv .c{fill:none;stroke-width:2.6;stroke-linecap:round}
+
+/* lists */
+dl.skills{margin:0;display:grid;grid-template-columns:max-content 1fr;gap:.7rem 1.5rem}
+dl.skills dt{font-weight:700}
+dl.skills dd{margin:0;color:var(--muted)}
+@media (max-width:34rem){dl.skills{grid-template-columns:1fr;gap:.1rem}dl.skills dd{margin-bottom:.8rem}}
+ul.plain{list-style:none;margin:0;padding:0}
+ul.plain li{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 0;border-bottom:1px solid var(--line)}
+ul.plain li span:last-child{color:var(--muted)}
+
+/* timeline (education is a real sequence) */
+.tl{list-style:none;margin:0;padding:0 0 0 1.4rem;border-left:2px solid var(--line)}
+.tl li{position:relative;padding-bottom:1.8rem}
+.tl li::before{content:"";position:absolute;left:calc(-1.4rem - 7px);top:.45rem;width:12px;height:12px;border-radius:50%;background:var(--paper);border:2px solid var(--mag)}
+.tl .yr{font-size:.85rem;color:var(--muted);display:block}
+
+/* project entries */
+.proj{display:grid;gap:.3rem 2rem;grid-template-columns:12rem 1fr;padding:1.5rem 0;border-top:1px solid var(--line)}
+.proj h3{grid-column:1}
+.proj .body{grid-column:2}
+.proj dl{margin:0;display:grid;grid-template-columns:5.5rem 1fr;gap:.5rem 1rem}
+.proj dt{font-weight:700;font-size:.9rem}
+.proj dd{margin:0;color:var(--muted)}
+@media (max-width:42rem){.proj{grid-template-columns:1fr}.proj .body{grid-column:1}}
+
+/* career project */
+.pair{display:grid;gap:1rem 2.5rem;grid-template-columns:1fr 1fr;padding:1.4rem 0;border-top:1px solid var(--line)}
+.pair h3{margin-bottom:.4rem}
+.pair .to{border-left:3px solid var(--blue);padding-left:1rem}
+@media (max-width:42rem){.pair{grid-template-columns:1fr}}
+.video{aspect-ratio:16/9;width:100%;background:#0b0e1c;border:1px solid var(--line)}
+.video video{width:100%;height:100%;object-fit:cover;display:block}
+.three{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));margin-top:1.5rem}
+.three h3{color:var(--mag);margin-bottom:.3rem}
+.fine{font-size:.85rem;color:var(--muted);cursor:pointer;background:none;border:0;padding:0;text-decoration:underline;font-family:var(--sans)}
+footer{border-top:1px solid var(--line);padding:1.5rem 0 calc(1.5rem + env(safe-area-inset-bottom,0px));font-size:.85rem;color:var(--muted)}
+@media (max-width:34rem){.hero{padding:1.4rem}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#welcome">Omar Tabti<small>Digital Sciences, ENSEEIHT</small></a>
+    <nav role="tablist" aria-label="Portfolio sections">
+      <button role="tab" id="t-welcome" aria-controls="p-welcome" aria-selected="true">Welcome</button>
+      <button role="tab" id="t-engineering" aria-controls="p-engineering" aria-selected="false" tabindex="-1">Engineering Course</button>
+      <button role="tab" id="t-mobility" aria-controls="p-mobility" aria-selected="false" tabindex="-1">International Mobility</button>
+      <button role="tab" id="t-sustainability" aria-controls="p-sustainability" aria-selected="false" tabindex="-1">Sustainability &amp; Civic Engagement</button>
+      <button role="tab" id="t-sport" aria-controls="p-sport" aria-selected="false" tabindex="-1">Sport &amp; Activities</button>
+      <button role="tab" id="t-career" aria-controls="p-career" aria-selected="false" tabindex="-1">Career Development</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- 1. WELCOME -->
+<section role="tabpanel" id="p-welcome" aria-labelledby="t-welcome" class="stack">
+  <div class="hero">
+    <div>
+      <p class="meta" style="margin-bottom:.8rem">1st-year engineering student, Toulouse INP–ENSEEIHT, class of 2029</p>
+      <h1>Mathematical models, turned into code that scales.</h1>
+      <p class="lead">I model physical and statistical problems, optimise them numerically, and I am training in High-Performance Computing and Big Data to make that work run at scale. I am looking for internships in artificial intelligence and quantitative analysis.</p>
+      <div class="cta">
+        <a class="btn main" href="#career" data-go="career">See my career project</a>
+        <a class="btn" href="#engineering" data-go="engineering">Read my research projects</a>
+      </div>
+    </div>
+    <figure>
+      <svg id="pv" viewBox="0 0 420 330" role="img" aria-labelledby="pvt pvd" tabindex="0">
+        <title id="pvt">Pressure–volume diagram of an ideal Stirling cycle</title>
+        <desc id="pvd">Two curved isotherms and two vertical isochores form a closed loop. Click to replay the trace.</desc>
+      </svg>
+      <figcaption>The ideal Stirling cycle: two isotherms, two isochores. This is the model I optimised in Python for my TIPE. Click to replay.</figcaption>
+    </figure>
+  </div>
+
+  <div class="cols">
+    <div>
+      <h2>About me</h2>
+      <p>After two years of preparatory classes (PCSI, then PSI*) at Lycée Déodat de Séverac in Toulouse, I joined ENSEEIHT to study Digital Sciences. The preparatory years gave me a solid base in applied mathematics, physics and scientific computing.</p>
+      <p>Over the next years I plan to specialise in <strong>High-Performance Computing &amp; Big Data</strong>.</p>
+    </div>
+    <div>
+      <h2>Languages</h2>
+      <ul class="plain">
+        <li><span>French</span><span>Native</span></li>
+        <li><span>Spanish</span><span>Native</span></li>
+        <li><span>Arabic</span><span>Native</span></li>
+        <li><span>Amazigh</span><span>Native</span></li>
+        <li><span>English</span><span>Advanced</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="rule">
+    <h2>Technical skills</h2>
+    <dl class="skills">
+      <dt>Programming</dt><dd>Python, C, OCaml, Ada, SQL, MATLAB, HTML/CSS, JavaScript</dd>
+      <dt>Mathematics</dt><dd>Numerical optimisation, numerical integration, linear algebra, statistics, algorithms</dd>
+      <dt>Tools</dt><dd>Linux, Git, SolidWorks (CAD), Excel</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- 2. ENGINEERING COURSE -->
+<section role="tabpanel" id="p-engineering" aria-labelledby="t-engineering" hidden class="stack">
+  <div>
+    <h2>Education</h2>
+    <p class="lead">From competitive preparatory classes to the Digital Sciences engineering degree.</p>
+    <ol class="tl" style="margin-top:1.8rem">
+      <li><span class="yr">2026 to 2029</span><h3>ENSEEIHT, Toulouse INP</h3>
+        <p class="meta" style="margin:.2rem 0 0">Engineering degree in Digital Sciences, 1st-year common core. Target specialisation: High-Performance Computing &amp; Big Data.</p></li>
+      <li><span class="yr">2024 to 2026</span><h3>Lycée Déodat de Séverac, Toulouse</h3>
+        <p class="meta" style="margin:.2rem 0 0">Preparatory classes PCSI, then PSI*: advanced mathematics, physics and engineering sciences for the national entrance exams.</p></li>
+    </ol>
+  </div>
+
+  <div>
+    <h2>Research projects (TIPE)</h2>
+    <p class="lead">Two modelling and optimisation projects, both built around a numerical model and a measurable objective.</p>
+    <div class="proj" style="margin-top:1.5rem">
+      <div><h3>Stirling engine</h3><span class="meta">2025 to 2026</span></div>
+      <div class="body"><dl>
+        <dt>Problem</dt><dd>Find which settings of a Stirling engine give the best thermal efficiency compared with the Carnot limit.</dd>
+        <dt>Method</dt><dd>Modelled the thermodynamic cycle and compared several numerical integration methods on accuracy to pick the most reliable solver.</dd>
+        <dt>Outcome</dt><dd>Optimised the engine parameters in Python to maximise efficiency relative to Carnot.</dd>
+      </dl></div>
+    </div>
+    <div class="proj">
+      <div><h3>Flettner rotor</h3><span class="meta">2024 to 2025</span></div>
+      <div class="body"><dl>
+        <dt>Problem</dt><dd>Size a Flettner rotor, a wind-assisted propulsion device based on the Magnus effect, for the best aerodynamic efficiency.</dd>
+        <dt>Method</dt><dd>Built a numerical performance model of the rotor.</dd>
+        <dt>Outcome</dt><dd>Optimised its geometry to identify the most efficient configuration.</dd>
+      </dl></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. INTERNATIONAL MOBILITY -->
+<section role="tabpanel" id="p-mobility" aria-labelledby="t-mobility" hidden class="stack">
+  <div>
+    <h2>International mobility projects</h2>
+    <p class="lead">The engineering degree includes a 17-week international mobility in semester 9. I have three options, each tied to a career profile I analysed in the Career Development tab.</p>
+  </div>
+  <div>
+    <div class="proj">
+      <div><h3>United Kingdom</h3><span class="meta">Option 1</span></div>
+      <div class="body"><p>Academic exchange or internship in AI, machine learning and quantitative methods.</p><p class="meta" style="margin:0">Linked profile: Quantitative Researcher / AI Engineer.</p></div>
+    </div>
+    <div class="proj">
+      <div><h3>Spain, Barcelona</h3><span class="meta">Option 2</span></div>
+      <div class="body"><p>Exchange semester at UPC Barcelona or a research internship, where my native Spanish is an asset.</p><p class="meta" style="margin:0">Linked profile: HPC &amp; Scientific Computing Engineer.</p></div>
+    </div>
+    <div class="proj">
+      <div><h3>Sweden or Canada</h3><span class="meta">Option 3</span></div>
+      <div class="body"><p>Academic semester at KTH Stockholm or Polytechnique Montréal in Data Science and Applied Mathematics.</p><p class="meta" style="margin:0">Linked profile: Machine Learning &amp; Data Scientist.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. SUSTAINABILITY & CIVIC ENGAGEMENT -->
+<section role="tabpanel" id="p-sustainability" aria-labelledby="t-sustainability" hidden class="stack">
+  <div>
+    <h2>Sustainability &amp; civic engagement</h2>
+    <p class="lead">Workshops and commitments, each linked to the UN Sustainable Development Goal it serves.</p>
+  </div>
+  <div>
+    <div class="proj">
+      <div><h3>Volunteer tutor</h3><span class="meta">2024 to 2026</span></div>
+      <div class="body"><p><span class="sdg" style="background:#C5192D">4</span><strong>Quality Education</strong></p>
+        <p>Helped final-year high-school students prepare for their exams on online community servers: I led exercise sessions, explained difficult concepts clearly and shared exam methods.</p></div>
+    </div>
+    <div class="proj">
+      <div><h3>Climate Fresk</h3></div>
+      <div class="body"><p><span class="sdg" style="background:#3F7E44">13</span><strong>Climate Action</strong></p>
+        <p>Took part in the collaborative workshop based on IPCC reports: we mapped the causes and consequences of climate change and discussed decarbonisation strategies for engineers.</p></div>
+    </div>
+    <div class="proj">
+      <div><h3>“Le Procès de King Kong”</h3><span class="meta">Awareness theatre play</span></div>
+      <div class="body"><p><span class="sdg" style="background:#E5243B">5</span><strong>Gender Equality</strong></p>
+        <p>Attended and reflected on a play about sexist and sexual violence, consent and gender equality in higher education and at work.</p></div>
+    </div>
+  </div>
+  <p class="meta rule">Next addition: the team infographic and pitch from the January ideation day.</p>
+</section>
+
+<!-- 5. SPORT & OTHER ACTIVITIES -->
+<section role="tabpanel" id="p-sport" aria-labelledby="t-sport" hidden class="stack">
+  <div>
+    <h2>Sport &amp; other activities</h2>
+    <p class="lead">What I do away from the keyboard, and what it teaches me.</p>
+  </div>
+  <div class="cols">
+    <div class="rule"><h3>Football</h3><p>Regular player, with a keen interest in team tactics and in how data analysis shapes modern sports performance.</p></div>
+    <div class="rule"><h3>Running and fitness</h3><p>Middle-distance running and strength training: they keep my focus, endurance and discipline steady.</p></div>
+    <div class="rule"><h3>Languages and travel</h3><p>I speak five languages natively or fluently, and I enjoy discovering other cultural perspectives.</p></div>
+    <div class="rule"><h3>AI and scientific computing</h3><p>Personal exploration of artificial intelligence, mathematical modelling and Linux development environments.</p></div>
+  </div>
+</section>
+
+<!-- 6. CAREER DEVELOPMENT -->
+<section role="tabpanel" id="p-career" aria-labelledby="t-career" hidden class="stack">
+  <div>
+    <h2>Career project</h2>
+    <p class="lead">Where I am going: AI and quantitative analysis, through High-Performance Computing and Big Data.</p>
+  </div>
+
+  <div class="rule">
+    <h3>CVs and LinkedIn</h3>
+    <p class="meta">English and French versions, same content and same message.</p>
+    <div class="cta" style="margin-top:.8rem">
+      <a class="btn main" href="CV_Omar_Tabti_EN.pdf" download>CV in English (PDF)</a>
+      <a class="btn" href="CV_Omar_Tabti_FR.pdf" download>CV en français (PDF)</a>
+      <a class="btn" href="https://www.linkedin.com/in/omar-tabti-12ab77439" target="_blank" rel="noopener">LinkedIn profile</a>
+      <a class="btn" href="mailto:omartabtiahaddouch44@gmail.com">Email me</a>
+    </div>
+  </div>
+
+  <div class="rule">
+    <h3>Elevator pitch</h3>
+    <p class="meta">My unique value proposition in English, in under three minutes.</p>
+    <div class="video"><video id="pitch-video" controls preload="metadata" aria-label="Elevator pitch video"><source src="pitch.mp4" type="video/mp4"></video></div>
+    <p style="margin:.6rem 0 0"><label class="fine">Preview a local video file<input type="file" accept="video/*" hidden id="local-video"></label></p>
+    <div class="three">
+      <div><h3>Now</h3><p>First-year engineering student in Digital Sciences at ENSEEIHT, heading for High-Performance Computing and Big Data.</p></div>
+      <div><h3>Past</h3><p>PCSI and PSI* preparatory classes, TIPE research on Stirling engine optimisation and Flettner rotors, two years as a volunteer maths and physics tutor.</p></div>
+      <div><h3>Future</h3><p>Internships and international mobility in AI and quantitative analysis, drawing on five spoken languages.</p></div>
+    </div>
+  </div>
+
+  <div class="rule">
+    <h3>Three role models, three mobility projects</h3>
+    <p class="meta">Each profile points to the place where I would build that career.</p>
+    <div class="pair" style="margin-top:1rem">
+      <div><h3>Quantitative Researcher / AI Engineer</h3><p>Applies stochastic modelling, numerical optimisation and machine learning to quantitative analysis.</p></div>
+      <div class="to"><strong>United Kingdom</strong><p class="meta" style="margin:.2rem 0 0">Academic exchange or internship in AI, machine learning and quantitative methods.</p></div>
+    </div>
+    <div class="pair">
+      <div><h3>HPC &amp; Scientific Computing Engineer</h3><p>Specialises in parallel computing, numerical simulation and high-performance architectures.</p></div>
+      <div class="to"><strong>Spain, Barcelona</strong><p class="meta" style="margin:.2rem 0 0">Exchange semester at UPC Barcelona or research internship.</p></div>
+    </div>
+    <div class="pair">
+      <div><h3>Machine Learning &amp; Data Scientist</h3><p>Works on large-scale data modelling, operations research and predictive algorithms.</p></div>
+      <div class="to"><strong>Sweden or Canada</strong><p class="meta" style="margin:.2rem 0 0">Semester at KTH Stockholm or Polytechnique Montréal.</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap">© 2026 Omar Tabti, Toulouse INP–ENSEEIHT</div></footer>
+
+<script>
+/* ---- Tabs (hash-based, keyboard accessible) ---- */
+const names=['welcome','engineering','mobility','sustainability','sport','career'];
+const tabs=names.map(n=>document.getElementById('t-'+n));
+function show(n,focus){
+  if(!names.includes(n))n='welcome';
+  names.forEach(k=>{
+    const on=k===n, t=document.getElementById('t-'+k);
+    document.getElementById('p-'+k).hidden=!on;
+    t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;
+  });
+  if(focus)document.getElementById('t-'+n).focus();
+  if(location.hash!=='#'+n)history.replaceState(null,'','#'+n);
+  window.scrollTo(0,0);
+  if(n==='welcome')drawOnce();
+}
+tabs.forEach((t,i)=>{
+  t.addEventListener('click',()=>show(names[i]));
+  t.addEventListener('keydown',e=>{
+    const d={ArrowRight:1,ArrowLeft:-1}[e.key];
+    if(d){e.preventDefault();show(names[(i+d+names.length)%names.length],true)}
+  });
+});
+document.querySelectorAll('[data-go]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();show(a.dataset.go)}));
+window.addEventListener('hashchange',()=>show(location.hash.slice(1)));
+
+/* ---- Stirling P-V diagram: computed from P = nRT/V ---- */
+const svg=document.getElementById('pv'), NS='http://www.w3.org/2000/svg';
+const X0=62,X1=400,Y0=290,Y1=28, V0=0.6,V1=3.4, Pm=1.2;
+const x=v=>X0+(v-V0)/(V1-V0)*(X1-X0), y=p=>Y0-p/Pm*(Y0-Y1);
+const Th=1.0,Tc=0.5,Va=1,Vb=3;
+function el(t,a,txt){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt)e.textContent=txt;svg.appendChild(e);return e}
+function iso(T,v0,v1){let d='';for(let i=0;i<=40;i++){const v=v0+(v1-v0)*i/40;d+=(i?'L':'M')+x(v).toFixed(1)+' '+y(T/v).toFixed(1)}return d}
+el('line',{class:'tick',x1:x(Va),x2:x(Va),y1:Y0,y2:y(Th/Va)});
+el('line',{class:'tick',x1:x(Vb),x2:x(Vb),y1:Y0,y2:y(Th/Vb)});
+el('path',{class:'ax',d:`M${X0} ${Y1-6}V${Y0}H${X1+8}`});
+el('text',{x:X1-4,y:Y0+22,'text-anchor':'end'},'Volume V');
+el('text',{x:X0-10,y:Y1-12,'text-anchor':'start'},'Pressure P');
+el('text',{x:x(Va),y:Y0+16,'text-anchor':'middle'},'V min');
+el('text',{x:x(Vb),y:Y0+16,'text-anchor':'middle'},'V max');
+const cycle=iso(Tc,Vb,Va)+`L${x(Va)} ${y(Tc/Va)}`+`L${x(Va)} ${y(Th/Va)}`.replace('L','L')+iso(Th,Va,Vb).replace('M','L')+`L${x(Vb)} ${y(Tc/Vb)}`;
+/* four faint full-colour legs + one animated trace on top */
+el('path',{class:'c',d:iso(Th,Va,Vb),stroke:'var(--mag)',opacity:.28});
+el('path',{class:'c',d:iso(Tc,Vb,Va),stroke:'var(--blue)',opacity:.28});
+el('path',{class:'c',d:`M${x(Va)} ${y(Tc/Va)}V${y(Th/Va)}M${x(Vb)} ${y(Th/Vb)}V${y(Tc/Vb)}`,stroke:'var(--ink)',opacity:.28});
+el('text',{x:x(1.75),y:y(Th/1.75)-10,fill:'var(--mag)',style:'fill:var(--mag)'},'hot isotherm');
+el('text',{x:x(1.9),y:y(Tc/1.9)+22,style:'fill:var(--blue)'},'cold isotherm');
+const trace=el('path',{class:'c',d:cycle,stroke:'var(--ink)'});
+const dot=el('circle',{r:6,fill:'var(--mag)',stroke:'var(--paper)','stroke-width':2});
+const len=trace.getTotalLength(); let raf, played=false;
+const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function place(f){trace.style.strokeDasharray=len;trace.style.strokeDashoffset=len*(1-f);const p=trace.getPointAtLength(len*f);dot.setAttribute('cx',p.x);dot.setAttribute('cy',p.y)}
+function play(){
+  cancelAnimationFrame(raf);
+  if(still){place(1);return}
+  const t0=performance.now(),D=3200;
+  (function step(t){const f=Math.min((t-t0)/D,1);place(1-Math.pow(1-f,2));if(f<1)raf=requestAnimationFrame(step)})(t0);
+}
+function drawOnce(){if(!played){played=true;play()}}
+svg.addEventListener('click',play);
+svg.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();play()}});
+
+/* ---- Local video preview ---- */
+document.getElementById('local-video').addEventListener('change',e=>{
+  const f=e.target.files[0];if(!f)return;
+  const v=document.getElementById('pitch-video');v.src=URL.createObjectURL(f);v.load();
+});
+
+show(location.hash.slice(1)||'welcome');
+</script>
+</body>
+</html>
