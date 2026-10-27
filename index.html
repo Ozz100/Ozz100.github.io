@@ -382,9 +382,9 @@ footer{border-top:1px solid var(--line);padding-block:1.5rem 2rem;font-size:.82r
     </div>
 
     <div id="opt-sweden" class="opt fadein">
-      <div><span class="tag">Option 1 · Academic semester</span><h3>Sweden</h3><p style="margin-top:.8rem">Uppsala University. Data science and applied mathematics.</p></div>
+      <div><span class="tag">Option 1 · Academic semester</span><h3>Sweden</h3><p style="margin-top:.8rem">Uppsala University.</p></div>
       <div class="facts">
-        <div><h4>What I would do</h4><p>Follow a semester of courses in data science and applied mathematics at Uppsala University, the oldest university in the Nordic countries, founded in 1477.</p></div>
+        <div><h4>What I would do</h4><p>Follow a semester of courses in data science and applied mathematics at Uppsala University.</p></div>
         <div><h4>Why it fits my project</h4><p>It extends my mathematical base towards data, in a university with a long scientific tradition. Niklas Zennström, my linked profile, studied engineering physics there.</p></div>
         <div><h4>What I would bring back</h4><p>Methods for working with data at scale, autonomy abroad, and a network in the Nordic tech scene.</p></div>
       </div>
@@ -690,7 +690,7 @@ document.querySelectorAll('[data-opt]').forEach(b=>b.addEventListener('click',()
 const SD=[['No poverty','#E5243B'],['Zero hunger','#DDA63A'],['Good health','#4C9F38'],['Quality education','#C5192D'],['Gender equality','#FF3A21'],['Clean water','#26BDE2'],['Clean energy','#FCC30B'],['Decent work','#A21942'],['Industry, innovation','#FD6925'],['Reduced inequalities','#DD1367'],['Sustainable cities','#FD9D24'],['Responsible consumption','#BF8B2E'],['Climate action','#3F7E44'],['Life below water','#0A97D9'],['Life on land','#56C02B'],['Peace, justice','#00689D'],['Partnerships','#19486A']];
 const ACT={13:['Climate Fresk','Climate Action','A collaborative workshop based on the IPCC reports. We mapped the causes and consequences of climate change and discussed decarbonisation strategies for engineers. It changed how I read the numbers behind the climate debate.'],
   4:['Volunteer tutor, 2024 to 2026','Quality Education','I helped final-year high-school students prepare for their exams on online community servers: I led exercise sessions, explained difficult concepts clearly and shared exam methods. Explaining is the best way I know to check that I understand.'],
-  5:['“Le Procès de King Kong”','Gender Equality','I attended and reflected on an awareness play about sexist and sexual violence, consent and gender equality in higher education and at work. It is a reminder that a good engineering team also depends on how people treat each other.']};
+  5:['“Le Procès de King Kong”','Gender Equality','I attended and reflected on an awareness play about sexist and sexual violence, consent and gender equality. It is a reminder that a good engineering team also depends on how people treat each other.']};
 const sg=$('sdg');
 SD.forEach(([n,c],i)=>{const b=document.createElement('button');b.type='button';b.style.background=c;b.dataset.n=i+1;b.tabIndex=ACT[i+1]?0:-1;if(ACT[i+1])b.classList.add('on');b.setAttribute('aria-label','Goal '+(i+1)+', '+n);b.innerHTML=(i+1)+'<small>'+n+'</small>';sg.appendChild(b)});
 function pickSdg(n){
