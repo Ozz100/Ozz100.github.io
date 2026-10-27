@@ -1,0 +1,724 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Omar Tabti e-Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: sticky tab bar with a sliding indicator; each tab is a short page with one interactive piece.
+   Palette: dusk slate by default (softer than black), clean light theme on a toggle. One accent colour. */
+:root{
+  --bg:#1B2136; --panel:#242B45; --panel2:#2D3555; --line:#3A4570; --ink:#F1F3FB; --mut:#AEB6D3;
+  --accent:#9DB2FF; --accent-ink:#141A33; --warm:#FFC48A;
+  --serif:'Newsreader',Georgia,serif; --sans:'Hanken Grotesk',system-ui,sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  color-scheme:dark;
+}
+:root[data-theme="light"]{
+  --bg:#F5F7FC; --panel:#FFFFFF; --panel2:#ECEFF8; --line:#D5DBEC; --ink:#171C36; --mut:#586283;
+  --accent:#3D56D4; --accent-ink:#FFFFFF; --warm:#B3601C; color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-padding-top:5rem}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.7 var(--sans);-webkit-font-smoothing:antialiased;transition:background .4s,color .4s;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance}
+h2{font-size:clamp(1.9rem,4vw,2.6rem);line-height:1.1;letter-spacing:-.01em}
+h3{font-size:1.3rem;line-height:1.2}
+p{margin:0 0 1rem;max-width:64ch;color:var(--mut)}
+.wrap{max-width:66rem;margin:0 auto}
+.lead{font-size:1.12rem;max-width:56ch}
+.eyebrow{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 .8rem;font-weight:500}
+.sub{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin:3rem 0 1.1rem;font-weight:500}
+.meta{font-size:.86rem;color:var(--mut)}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+  margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)));padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
+.bar{display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap}
+.top .wrap{max-width:78rem}
+.mark{font:400 1.2rem var(--serif);color:var(--ink);text-decoration:none;white-space:nowrap;padding:.7rem 0}
+nav[role=tablist]{position:relative;display:flex;gap:1.3rem;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+nav::-webkit-scrollbar{display:none}
+nav button{all:unset;cursor:pointer;white-space:nowrap;padding:.95rem 0;font:500 .88rem var(--sans);color:var(--mut);transition:color .25s}
+nav button:hover,nav button[aria-selected=true]{color:var(--ink)}
+nav button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.ind{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--accent);transition:transform .45s var(--ease),width .45s var(--ease)}
+.tg{all:unset;cursor:pointer;width:2.2rem;height:2.2rem;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--ink);transition:border-color .25s,transform .4s var(--ease)}
+.tg:hover{border-color:var(--accent);transform:rotate(25deg)}
+.tg:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tg svg{width:1.05rem;height:1.05rem}
+@media (max-width:52rem){.bar{gap:.2rem 1rem}nav[role=tablist]{order:3;flex-basis:100%}.tg{margin-left:auto}}
+
+/* panels and transitions */
+main{padding-block:3rem 4rem}
+.panel[hidden]{display:none}
+.panel.enter>*{animation:rise .6s var(--ease) backwards}
+.panel.enter>*:nth-child(2){animation-delay:.06s}.panel.enter>*:nth-child(3){animation-delay:.12s}
+.panel.enter>*:nth-child(4){animation-delay:.18s}.panel.enter>*:nth-child(n+5){animation-delay:.24s}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}}
+.fadein{animation:fade .45s var(--ease)}
+.panel>*+*{margin-top:3.4rem}
+.head p{margin-top:1rem}
+
+/* buttons, cards */
+.btn{display:inline-block;padding:.7rem 1.25rem;border:1px solid var(--mut);color:var(--ink);text-decoration:none;font:500 .92rem var(--sans);background:transparent;cursor:pointer;border-radius:999px;transition:background .3s,border-color .3s,color .3s,transform .3s var(--ease)}
+.btn:hover{border-color:var(--accent);transform:translateY(-2px)}
+.btn.main{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.main:hover{filter:brightness(1.08)}
+.cta{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.6rem}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:1.4rem;transition:transform .35s var(--ease),border-color .3s,background .3s}
+.card.link{cursor:pointer;text-align:left;font:inherit;color:inherit;display:block;width:100%}
+.card.link:hover{transform:translateY(-4px);border-color:var(--accent)}
+.card h3{margin-bottom:.4rem}
+.card p{margin:0;font-size:.95rem}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(12.5rem,100%),1fr))}
+.grid>*{min-width:0}
+.arrow{display:inline-block;transition:transform .3s var(--ease);margin-left:.3rem}
+.card.link:hover .arrow{transform:translateX(5px)}
+.cols{display:grid;gap:2.5rem;grid-template-columns:repeat(auto-fit,minmax(min(18rem,100%),1fr))}
+.cols>*{min-width:0}
+.seg{display:inline-flex;flex-wrap:wrap;gap:.2rem;padding:.25rem;background:var(--panel);border:1px solid var(--line);border-radius:1.3rem}
+.seg button{all:unset;cursor:pointer;padding:.45rem 1.05rem;border-radius:999px;font:500 .9rem var(--sans);color:var(--mut);transition:background .3s,color .3s}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-selected=true]{background:var(--accent);color:var(--accent-ink)}
+.seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem;margin:0;padding:0;list-style:none}
+.chips li{font-size:.85rem;border:1px solid var(--line);border-radius:999px;padding:.2rem .8rem;color:var(--ink);transition:border-color .25s,background .25s}
+.chips li:hover{border-color:var(--accent);background:var(--panel)}
+.plain{list-style:none;margin:0;padding:0}
+.plain li{display:flex;justify-content:space-between;gap:1rem;padding:.55rem 0;border-bottom:1px solid var(--line)}
+.plain li span:last-child{color:var(--mut)}
+
+/* hero */
+.hero{display:grid;gap:2rem;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:center;padding-block:1rem 1rem}
+.hero h1{font-size:clamp(3rem,8vw,5.4rem);line-height:1;letter-spacing:-.02em;margin:.2rem 0 1.4rem}
+.hero h1 em{font-style:italic;color:var(--accent)}
+#net{width:100%;aspect-ratio:1/1;max-height:24rem;display:block}
+@media (max-width:46rem){.hero{grid-template-columns:1fr}#net{max-width:19rem;margin:0 auto}}
+
+/* timeline */
+.tl{list-style:none;margin:0;padding:0 0 0 1.6rem;border-left:1px solid var(--line)}
+.tl li{position:relative;padding-bottom:2rem}
+.tl li::before{content:"";position:absolute;left:calc(-1.6rem - 5px);top:.5rem;width:9px;height:9px;border-radius:50%;background:var(--bg);border:2px solid var(--accent);transition:background .3s,transform .3s}
+.tl li:hover::before{background:var(--accent);transform:scale(1.3)}
+.tl .yr{font-size:.82rem;color:var(--mut);display:block;margin-bottom:.15rem}
+.tl p{margin:.4rem 0 0}
+dl.kv{margin:0;display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:.7rem 1.2rem}
+dl.kv dt{font-weight:600;font-size:.9rem}
+dl.kv dd{margin:0;color:var(--mut)}
+@media (max-width:34rem){dl.kv{grid-template-columns:1fr;gap:.1rem}dl.kv dd{margin-bottom:.8rem}}
+
+/* figures */
+.fig{display:grid;gap:1.4rem 2.5rem;grid-template-columns:repeat(auto-fit,minmax(min(20rem,100%),1fr));align-items:start;margin-top:1.8rem}
+.fig>*{min-width:0}
+.plot{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:1rem}
+.plot svg{width:100%;height:auto;display:block}
+.plot text{font:400 11px var(--sans);fill:var(--mut)}
+.plot .ax{stroke:var(--mut);stroke-width:1;fill:none;opacity:.7}
+.plot .ghost{fill:none;stroke:var(--line);stroke-width:2.4;stroke-linecap:round}
+.plot .area{fill:var(--accent);opacity:.14}
+.plot .trace{fill:none;stroke:var(--accent);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.plot .dot{fill:var(--warm)}
+.ctrl{display:grid;grid-template-columns:auto 1fr auto;gap:.5rem .9rem;align-items:center;margin-top:.9rem;font-size:.85rem;color:var(--mut)}
+.ctrl input[type=range]{accent-color:var(--accent);width:100%;min-width:0}
+.ctrl output{color:var(--ink);font-variant-numeric:tabular-nums;min-width:4.5ch;text-align:right}
+.readout{font-family:var(--serif);font-size:1.5rem;color:var(--ink);margin:.6rem 0 0}
+.readout small{display:block;font:400 .82rem var(--sans);color:var(--mut)}
+.ctrl button{grid-column:1/-1;justify-self:start}
+.mini{font:500 .8rem var(--sans);background:none;border:1px solid var(--line);color:var(--ink);padding:.3rem .8rem;border-radius:999px;cursor:pointer;transition:border-color .25s}
+.mini:hover{border-color:var(--accent)}
+.wind line{stroke:var(--mut);stroke-width:1.6;stroke-dasharray:10 14;stroke-linecap:round;animation:flow 1.2s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-24}}
+.spin{transform-box:fill-box;transform-origin:center;animation:rot 3s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+
+/* mobility */
+.opt{display:grid;gap:1.8rem 2.5rem;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);margin-top:1.8rem}
+.opt>*{min-width:0}
+.opt h3{font-size:clamp(2rem,4vw,2.8rem);line-height:1}
+.tag{display:inline-block;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:.12rem .7rem;color:var(--mut);margin-bottom:.9rem}
+.opt .facts{display:grid;gap:1.2rem}
+.opt .facts h4{margin:0 0 .25rem;font:600 .9rem var(--sans);color:var(--ink)}
+.opt .facts p{margin:0;font-size:.97rem}
+@media (max-width:46rem){.opt{grid-template-columns:1fr}}
+.linked{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1.2rem;margin-top:1.6rem;padding:1rem 1.2rem;background:var(--panel);border:1px solid var(--line);border-radius:12px}
+.linked span{color:var(--mut);font-size:.92rem}
+.road{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.4rem;margin-top:1.4rem}
+.road>div{position:relative;padding-top:1rem;font-size:.9rem;color:var(--mut)}
+.road>div::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--line);border-radius:2px}
+.road>div::after{content:"";position:absolute;left:0;top:0;height:4px;width:var(--w,0%);background:var(--accent);border-radius:2px}
+.panel.enter .road>div::after{animation:fillbar 1.2s .3s var(--ease) backwards}
+@keyframes fillbar{from{width:0}}
+.road b{display:block;color:var(--ink);font-weight:600}
+@media (max-width:42rem){.road{grid-template-columns:1fr 1fr}}
+
+/* sustainability */
+.sdg{display:grid;grid-template-columns:repeat(auto-fill,minmax(4.2rem,1fr));gap:.4rem}
+.sdg button{all:unset;box-sizing:border-box;aspect-ratio:1/1;display:flex;flex-direction:column;justify-content:space-between;padding:.4rem;color:#fff;font:700 1.1rem var(--sans);opacity:.28;border-radius:4px;transition:opacity .3s,transform .3s var(--ease)}
+.sdg button small{font:500 .56rem/1.15 var(--sans)}
+.sdg button.on{opacity:.8;cursor:pointer}
+.sdg button.on:hover,.sdg button.sel{opacity:1;transform:translateY(-4px) scale(1.04)}
+.acts{display:grid;gap:.6rem}
+.acts button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 1.2rem;border:1px solid var(--line);border-radius:12px;background:var(--panel);transition:border-color .3s,transform .3s var(--ease)}
+.acts button:hover{transform:translateX(4px)}
+.acts button[aria-selected=true]{border-color:var(--accent)}
+.acts b{font:400 1.2rem var(--serif)}
+.pill{display:inline-grid;place-items:center;min-width:1.7rem;height:1.7rem;padding:0 .35rem;border-radius:4px;color:#fff;font:700 .8rem var(--sans)}
+.detail{padding:1.4rem;border:1px solid var(--line);border-radius:12px;min-height:11rem}
+.detail p:last-child{margin-bottom:0}
+.soon{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center}
+
+/* sport */
+.sp{cursor:pointer;text-align:left;font:inherit;color:inherit;display:block;width:100%}
+.sp .more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.sp .more>div{overflow:hidden}
+.sp .more p{margin:.8rem 0 0;color:var(--ink)}
+.sp[aria-expanded=true] .more{grid-template-rows:1fr}
+.sp .plus{float:right;color:var(--accent);transition:transform .35s var(--ease);font-size:1.4rem;line-height:1}
+.sp[aria-expanded=true] .plus{transform:rotate(45deg)}
+
+/* career */
+.route{width:100%;min-width:34rem;height:auto;display:block}
+.scrollx{overflow-x:auto}
+.route text{font:500 12px var(--sans);fill:var(--ink)}
+.route .sm{font-weight:400;fill:var(--mut);font-size:11px}
+.route .ln{fill:none;stroke:var(--accent);stroke-width:2}
+.route circle{fill:var(--bg);stroke:var(--accent);stroke-width:2.4}
+.panel.enter .route .ln{stroke-dasharray:1;animation:draw 1.6s .2s var(--ease) backwards}
+@keyframes draw{from{stroke-dashoffset:1}}
+.docs{display:flex;flex-wrap:wrap;gap:.7rem}
+.video{aspect-ratio:16/9;width:100%;max-width:40rem;background:var(--panel2);border:1px solid var(--line);border-radius:12px;position:relative;display:grid;place-items:center;overflow:hidden}
+.video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.video span{color:var(--mut);font-size:.92rem;padding:1rem;text-align:center}
+.file{font-size:.84rem;color:var(--accent);cursor:pointer;text-decoration:underline;background:none;border:0;padding:0;font-family:var(--sans)}
+.acc{border:1px solid var(--line);border-radius:12px;background:var(--panel);overflow:hidden;transition:border-color .3s}
+.acc+.acc{margin-top:.7rem}
+.acc.open{border-color:var(--accent)}
+.acc>button{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.2rem 1rem;padding:1.2rem 1.4rem;align-items:center}
+.acc>button:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+.acc h3{font-size:1.5rem}
+.acc .who{color:var(--mut);font-size:.92rem}
+.acc .chev{grid-row:1/3;grid-column:2;width:1.2rem;height:1.2rem;transition:transform .4s var(--ease);color:var(--accent)}
+.acc.open .chev{transform:rotate(180deg)}
+.acc .body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
+.acc.open .body{grid-template-rows:1fr}
+.acc .body>div{overflow:hidden}
+.acc .inner{padding:0 1.4rem 1.4rem;display:grid;gap:1.6rem 2.5rem;grid-template-columns:repeat(auto-fit,minmax(min(17rem,100%),1fr))}
+.acc .inner>*{min-width:0}
+.steps{list-style:none;margin:0;padding:0 0 0 1.2rem;border-left:1px solid var(--line)}
+.steps li{position:relative;padding-bottom:.9rem;font-size:.93rem;color:var(--mut)}
+.steps li::before{content:"";position:absolute;left:calc(-1.2rem - 4px);top:.55rem;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.steps b{color:var(--ink);font-weight:600}
+.take{font-size:.95rem}
+.take h4{margin:0 0 .3rem;font:600 .9rem var(--sans);color:var(--ink)}
+footer{border-top:1px solid var(--line);padding-block:1.5rem 2rem;font-size:.82rem;color:var(--mut)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="mark" href="#welcome" data-go="welcome">Omar Tabti</a>
+    <nav role="tablist" aria-label="Portfolio sections" id="tabs">
+      <button role="tab" id="t-welcome" aria-controls="p-welcome" aria-selected="true">Welcome</button>
+      <button role="tab" id="t-engineering" aria-controls="p-engineering" aria-selected="false" tabindex="-1">Engineering Course</button>
+      <button role="tab" id="t-mobility" aria-controls="p-mobility" aria-selected="false" tabindex="-1">International Mobility</button>
+      <button role="tab" id="t-sustainability" aria-controls="p-sustainability" aria-selected="false" tabindex="-1">Sustainability &amp; Civic Engagement</button>
+      <button role="tab" id="t-sport" aria-controls="p-sport" aria-selected="false" tabindex="-1">Sport &amp; Activities</button>
+      <button role="tab" id="t-career" aria-controls="p-career" aria-selected="false" tabindex="-1">Career Development</button>
+      <span class="ind" id="ind"></span>
+    </nav>
+    <button class="tg" id="theme" type="button" aria-label="Switch between dusk and light theme">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- 1. WELCOME -->
+<section role="tabpanel" id="p-welcome" aria-labelledby="t-welcome" class="panel">
+  <div class="hero">
+    <div>
+      <p class="eyebrow">1st-year engineering student · Toulouse INP–ENSEEIHT · Class of 2029</p>
+      <h1>Hi, I'm <em>Omar</em>.</h1>
+      <p class="lead">I study Digital Sciences and I like the places where maths, code and AI meet. I model problems, optimise them numerically, and I am heading towards High-Performance Computing and Big Data. I am looking for internships in artificial intelligence and quantitative analysis.</p>
+      <div class="cta">
+        <button class="btn main" type="button" data-go="career">Career development</button>
+        <button class="btn" type="button" data-go="engineering">Research projects</button>
+      </div>
+    </div>
+    <canvas id="net" role="img" aria-label="Animated neural network with signals travelling from left to right"></canvas>
+  </div>
+
+  <div class="grid">
+    <button class="card link" type="button" data-go="engineering"><h3>Engineering Course<span class="arrow">→</span></h3><p>Prep classes, ENSEEIHT, and two TIPE research projects.</p></button>
+    <button class="card link" type="button" data-go="mobility"><h3>International Mobility<span class="arrow">→</span></h3><p>Sweden, the United Kingdom or Canada.</p></button>
+    <button class="card link" type="button" data-go="sustainability"><h3>Sustainability<span class="arrow">→</span></h3><p>What I did, mapped to the UN goals.</p></button>
+    <button class="card link" type="button" data-go="sport"><h3>Sport &amp; Activities<span class="arrow">→</span></h3><p>Football, running, languages, AI.</p></button>
+    <button class="card link" type="button" data-go="career"><h3>Career Development<span class="arrow">→</span></h3><p>CVs, pitch, three role models.</p></button>
+  </div>
+
+  <div class="cols">
+    <div>
+      <h2 style="font-size:1.8rem;margin-bottom:1rem">About me</h2>
+      <p>After two years of preparatory classes (PCSI, then PSI*) at Lycée Déodat de Séverac in Toulouse, I joined ENSEEIHT to study Digital Sciences. The preparatory years gave me a solid base in applied mathematics, physics and scientific computing.</p>
+      <p>Over the next years I plan to specialise in <strong style="color:var(--ink);font-weight:600">High-Performance Computing &amp; Big Data</strong>.</p>
+    </div>
+    <div>
+      <h2 style="font-size:1.8rem;margin-bottom:1rem">Languages</h2>
+      <ul class="plain">
+        <li><span>French</span><span>Native</span></li>
+        <li><span>Spanish</span><span>Native</span></li>
+        <li><span>Arabic</span><span>Native</span></li>
+        <li><span>Amazigh</span><span>Native</span></li>
+        <li><span>English</span><span>Advanced</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <h2 style="font-size:1.8rem;margin-bottom:1.2rem">Technical skills</h2>
+    <dl class="kv" style="grid-template-columns:7rem minmax(0,1fr)">
+      <dt>Programming</dt><dd><ul class="chips"><li>Python</li><li>C</li><li>OCaml</li><li>Ada</li><li>SQL</li><li>MATLAB</li><li>HTML/CSS</li><li>JavaScript</li></ul></dd>
+      <dt>Mathematics</dt><dd><ul class="chips"><li>Numerical optimisation</li><li>Numerical integration</li><li>Linear algebra</li><li>Statistics</li><li>Algorithms</li></ul></dd>
+      <dt>Tools</dt><dd><ul class="chips"><li>Linux</li><li>Git</li><li>SolidWorks (CAD)</li><li>Excel</li></ul></dd>
+    </dl>
+  </div>
+</section>
+
+<!-- 2. ENGINEERING COURSE -->
+<section role="tabpanel" id="p-engineering" aria-labelledby="t-engineering" hidden class="panel">
+  <div class="head">
+    <p class="eyebrow">Engineering course</p>
+    <h2>From competitive prep classes to Digital Sciences</h2>
+    <p class="lead">Two years of intensive mathematics and physics, then an engineering degree built around computing, with two research projects that each pair a numerical model with a measurable objective.</p>
+  </div>
+
+  <div>
+    <p class="sub" style="margin-top:0">Education</p>
+    <ol class="tl">
+      <li><span class="yr">2026 to 2029</span><h3>ENSEEIHT, Toulouse INP</h3>
+        <p>Engineering degree in Digital Sciences, first-year common core. Target specialisation: High-Performance Computing &amp; Big Data. The programme includes a 17-week international mobility in semester 9.</p></li>
+      <li><span class="yr">2024 to 2026</span><h3>Lycée Déodat de Séverac, Toulouse</h3>
+        <p>Preparatory classes PCSI, then PSI*: advanced mathematics, physics and engineering sciences, preparing the national entrance exams.</p></li>
+    </ol>
+    <p class="sub">This semester</p>
+    <div class="card" style="display:grid;gap:.6rem">
+      <h3>Probability</h3>
+      <p>Random variables, Gaussian vectors, the central limit theorem, binomial laws and changes of variables. These are the tools behind statistics and most of machine learning.</p>
+      <ul class="chips" style="margin-top:.4rem"><li>Gaussian vectors</li><li>Central limit theorem</li><li>Binomial laws</li><li>Change of variables</li></ul>
+    </div>
+  </div>
+
+  <div>
+    <p class="sub" style="margin-top:0">Research projects (TIPE)</p>
+    <div class="seg" role="tablist" aria-label="TIPE projects" id="tipe">
+      <button role="tab" aria-selected="true" data-k="stirling">Stirling engine</button>
+      <button role="tab" aria-selected="false" data-k="flettner">Flettner rotor</button>
+    </div>
+    <div id="tipe-stirling" class="fadein">
+      <div class="fig">
+        <div>
+          <p class="meta" style="margin:0 0 1rem">2025 to 2026</p>
+          <dl class="kv">
+            <dt>Problem</dt><dd>Find which settings of a Stirling engine give the best thermal efficiency compared with the Carnot limit.</dd>
+            <dt>Method</dt><dd>Modelled the thermodynamic cycle and compared several numerical integration methods on accuracy to pick the most reliable solver.</dd>
+            <dt>Outcome</dt><dd>Optimised the engine parameters in Python to maximise efficiency relative to Carnot.</dd>
+          </dl>
+        </div>
+        <div class="plot">
+          <svg id="pv" viewBox="0 0 420 270" role="img" aria-label="Pressure-volume diagram of an ideal Stirling cycle that reshapes with the temperatures"></svg>
+          <div class="ctrl">
+            <label for="th">Hot, T<sub>h</sub></label><input type="range" id="th" min="500" max="1000" step="10" value="800"><output id="thv">800 K</output>
+            <label for="tc">Cold, T<sub>c</sub></label><input type="range" id="tc" min="300" max="450" step="10" value="350"><output id="tcv">350 K</output>
+            <button class="mini" type="button" id="pvplay">Replay the cycle</button>
+          </div>
+          <p class="readout" id="eta"></p>
+        </div>
+      </div>
+    </div>
+    <div id="tipe-flettner" hidden>
+      <div class="fig">
+        <div>
+          <p class="meta" style="margin:0 0 1rem">2024 to 2025</p>
+          <dl class="kv">
+            <dt>Problem</dt><dd>Size a Flettner rotor, a wind-assisted propulsion device based on the Magnus effect, for the best aerodynamic efficiency.</dd>
+            <dt>Method</dt><dd>Built a numerical performance model of the rotor.</dd>
+            <dt>Outcome</dt><dd>Optimised its geometry to identify the most efficient configuration.</dd>
+          </dl>
+        </div>
+        <div class="plot">
+          <svg id="fl" viewBox="0 0 420 250" role="img" aria-label="A spinning cylinder in a crosswind, with a lift arrow that grows with the spin"></svg>
+          <div class="ctrl">
+            <label for="spin">Spin ratio</label><input type="range" id="spin" min="0" max="4" step="0.1" value="2"><output id="spinv">2.0</output>
+          </div>
+          <p class="readout" style="font-size:.9rem;font-family:var(--sans);color:var(--mut)">Qualitative sketch: the Magnus force grows with the spin, then flattens. Sizing the rotor means balancing it against drag.</p>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:2rem">What both projects taught me: start from a physical model, check the numerical method before trusting it, then optimise against a number that can be measured.</p>
+  </div>
+</section>
+
+<!-- 3. INTERNATIONAL MOBILITY -->
+<section role="tabpanel" id="p-mobility" aria-labelledby="t-mobility" hidden class="panel">
+  <div class="head">
+    <p class="eyebrow">International mobility</p>
+    <h2>Three destinations, three profiles</h2>
+    <p class="lead">The engineering degree includes a 17-week international mobility in semester 9. I have three options, each tied to an engineer whose path I analysed in Career Development.</p>
+  </div>
+
+  <div>
+    <div class="seg" role="tablist" aria-label="Mobility options" id="mseg">
+      <button role="tab" aria-selected="true" data-k="sweden">Sweden</button>
+      <button role="tab" aria-selected="false" data-k="uk">United Kingdom</button>
+      <button role="tab" aria-selected="false" data-k="canada">Canada</button>
+    </div>
+
+    <div id="opt-sweden" class="opt fadein">
+      <div><span class="tag">Option 1 · Academic semester</span><h3>Sweden</h3><p style="margin-top:.8rem">Uppsala University. Data science and applied mathematics.</p></div>
+      <div class="facts">
+        <div><h4>What I would do</h4><p>Follow a semester of courses in data science and applied mathematics at Uppsala University, the oldest university in the Nordic countries, founded in 1477.</p></div>
+        <div><h4>Why it fits my project</h4><p>It extends my mathematical base towards data, in a university with a long scientific tradition. Niklas Zennström, my linked profile, studied engineering physics there.</p></div>
+        <div><h4>What I would bring back</h4><p>Methods for working with data at scale, autonomy abroad, and a network in the Nordic tech scene.</p></div>
+      </div>
+    </div>
+    <div id="opt-uk" class="opt" hidden>
+      <div><span class="tag">Option 2 · Exchange or internship</span><h3>United Kingdom</h3><p style="margin-top:.8rem">AI, machine learning and quantitative methods, at a university or in a company.</p></div>
+      <div class="facts">
+        <div><h4>What I would do</h4><p>An academic exchange or a research internship in AI, machine learning and quantitative methods.</p></div>
+        <div><h4>Why it fits my project</h4><p>My English is advanced, and the UK combines strong AI research with a large quantitative finance sector, my two target fields. An ENSEEIHT engineer has already built a research career there.</p></div>
+        <div><h4>What I would bring back</h4><p>Applied quantitative skills and a professional English that is ready for international teams.</p></div>
+      </div>
+    </div>
+    <div id="opt-canada" class="opt" hidden>
+      <div><span class="tag">Option 3 · Academic semester</span><h3>Canada</h3><p style="margin-top:.8rem">Polytechnique Montréal. Data science and applied mathematics.</p></div>
+      <div class="facts">
+        <div><h4>What I would do</h4><p>Follow a semester of data science and applied mathematics at Polytechnique Montréal, close to Mila, one of the world's leading deep learning research institutes.</p></div>
+        <div><h4>Why it fits my project</h4><p>Montréal is a French-speaking city at the centre of deep learning research. I would work in my native language while joining a leading AI community.</p></div>
+        <div><h4>What I would bring back</h4><p>Hands-on exposure to deep learning, and a North American view of the engineering profession.</p></div>
+      </div>
+    </div>
+
+    <div class="linked" id="linked"></div>
+  </div>
+
+  <div>
+    <p class="sub" style="margin-top:0">Where mobility sits in my degree</p>
+    <div class="road">
+      <div style="--w:100%"><b>Launch · S5–S6</b>Branding, UVP, e-reputation. First internship in S6.</div>
+      <div style="--w:0%"><b>Upgrade · S7–S8</b>Creativity, self-awareness, second internship in S8.</div>
+      <div style="--w:0%"><b>Mobility · S9</b>17 weeks abroad, English level B2+.</div>
+      <div style="--w:0%"><b>Validation · S9–S10</b>Showcasing, recommendations, jury.</div>
+    </div>
+    <p class="meta" style="margin-top:.8rem">I am at the beginning of the first phase.</p>
+  </div>
+</section>
+
+<!-- 4. SUSTAINABILITY -->
+<section role="tabpanel" id="p-sustainability" aria-labelledby="t-sustainability" hidden class="panel">
+  <div class="head">
+    <p class="eyebrow">Sustainability &amp; civic engagement</p>
+    <h2>What I did, and the goal it serves</h2>
+    <p class="lead">Workshops and commitments, each linked to the UN Sustainable Development Goal it serves. Pick an activity, or a lit-up goal.</p>
+  </div>
+  <div class="sdg" id="sdg" role="group" aria-label="The 17 UN Sustainable Development Goals"></div>
+  <div class="cols">
+    <div class="acts" id="acts" role="tablist" aria-label="Activities">
+      <button role="tab" aria-selected="true" data-sdg="13"><b>Climate Fresk</b><span class="pill" style="background:#3F7E44">13</span></button>
+      <button role="tab" aria-selected="false" data-sdg="4"><b>Volunteer tutor</b><span class="pill" style="background:#C5192D">4</span></button>
+      <button role="tab" aria-selected="false" data-sdg="5"><b>“Le Procès de King Kong”</b><span class="pill" style="background:#E5243B">5</span></button>
+    </div>
+    <div class="detail" id="detail" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- 5. SPORT -->
+<section role="tabpanel" id="p-sport" aria-labelledby="t-sport" hidden class="panel">
+  <div class="head">
+    <p class="eyebrow">Sport &amp; other activities</p>
+    <h2>Away from the keyboard</h2>
+    <p class="lead">What I do outside class, and what each activity teaches me. Tap a card to read more.</p>
+  </div>
+  <div class="grid" id="sports">
+    <button class="card link sp" type="button" aria-expanded="false"><span class="plus">+</span><h3>Football</h3><p>Regular player, with a keen interest in team tactics and in how data analysis shapes modern sports performance.</p>
+      <span class="more"><div><p>It taught me to work inside a team, to read a situation quickly and to accept a role for the group's benefit.</p></div></span></button>
+    <button class="card link sp" type="button" aria-expanded="false"><span class="plus">+</span><h3>Running and fitness</h3><p>Middle-distance running and strength training.</p>
+      <span class="more"><div><p>They keep my focus, endurance and discipline steady, and a long training plan works like a long project.</p></div></span></button>
+    <button class="card link sp" type="button" aria-expanded="false"><span class="plus">+</span><h3>Languages and travel</h3><p>Five languages, spoken natively or fluently.</p>
+      <span class="more"><div><p>I enjoy discovering other cultural perspectives, which is why international mobility matters to me.</p></div></span></button>
+    <button class="card link sp" type="button" aria-expanded="false"><span class="plus">+</span><h3>AI and scientific computing</h3><p>Personal exploration of artificial intelligence, mathematical modelling and Linux development environments.</p>
+      <span class="more"><div><p>This is where my studies and my curiosity meet: I try things on my own before they appear in a course.</p></div></span></button>
+  </div>
+</section>
+
+<!-- 6. CAREER -->
+<section role="tabpanel" id="p-career" aria-labelledby="t-career" hidden class="panel">
+  <div class="head">
+    <p class="eyebrow">Career development</p>
+    <h2>AI and quantitative analysis, through HPC and Big Data</h2>
+    <p class="lead">My career project in one line, then the documents, the pitch and the three engineers whose paths I studied.</p>
+  </div>
+
+  <div class="plot scrollx" style="padding:1.2rem 1.4rem">
+    <svg class="route" viewBox="0 0 720 120" role="img" aria-label="Route from first-year Digital Sciences to HPC and Big Data, then mobility abroad, then AI and quantitative analysis">
+      <path class="ln" pathLength="1" d="M60 60H660"/>
+      <g><circle cx="60" cy="60" r="8"/><text x="60" y="94" text-anchor="middle">Now</text><text class="sm" x="60" y="110" text-anchor="middle">Digital Sciences</text></g>
+      <g><circle cx="260" cy="60" r="8"/><text x="260" y="94" text-anchor="middle">Specialisation</text><text class="sm" x="260" y="110" text-anchor="middle">HPC &amp; Big Data</text></g>
+      <g><circle cx="460" cy="60" r="8"/><text x="460" y="94" text-anchor="middle">Abroad, S9</text><text class="sm" x="460" y="110" text-anchor="middle">Knowledge and experience</text></g>
+      <g><circle cx="660" cy="60" r="8"/><text x="660" y="94" text-anchor="middle">Target</text><text class="sm" x="660" y="110" text-anchor="middle">AI &amp; quantitative analysis</text></g>
+    </svg>
+  </div>
+
+  <div>
+    <div class="seg" role="tablist" aria-label="Career sections" id="cseg">
+      <button role="tab" aria-selected="true" data-k="brand">Personal brand</button>
+      <button role="tab" aria-selected="false" data-k="docs">Documents &amp; pitch</button>
+      <button role="tab" aria-selected="false" data-k="models">Role models</button>
+    </div>
+
+    <div id="c-brand" class="fadein" style="margin-top:1.8rem">
+      <div class="grid">
+        <div class="card"><p class="eyebrow">Product</p><h3>What I bring</h3><p>A solid base in mathematics, probability and numerical modelling, with real practice in Python and C, and two research projects behind it.</p></div>
+        <div class="card"><p class="eyebrow">Brand</p><h3>How people describe me</h3><p>Rigorous, curious, multilingual.</p></div>
+        <div class="card"><p class="eyebrow">Value proposition</p><h3>What makes me different</h3><p>I turn mathematical and numerical models into working code, and I can do it in five languages, which suits international teams.</p></div>
+      </div>
+    </div>
+
+    <div id="c-docs" hidden style="margin-top:1.8rem">
+      <p class="sub" style="margin-top:0">CVs and LinkedIn</p>
+      <div class="docs">
+        <a class="btn main" href="CV_Omar_Tabti_EN.pdf">CV in English</a>
+        <a class="btn" href="CV_Omar_Tabti_FR.pdf">CV en français</a>
+        <a class="btn" href="https://www.linkedin.com/in/omar-tabti-12ab77439" target="_blank" rel="noopener">LinkedIn profile</a>
+      </div>
+      <p class="meta" style="margin-top:.9rem">Contact: omartabtiahaddouch44@gmail.com</p>
+      <p class="sub">Elevator pitch</p>
+      <div class="video"><span id="vph">Pitch video, 2 to 3 minutes, in English</span><video id="pitch-video" controls preload="metadata" aria-label="Elevator pitch video" hidden><source src="pitch.mp4" type="video/mp4"></video></div>
+      <p style="margin:.7rem 0 0"><label class="file">Preview a local video file<input type="file" accept="video/*" hidden id="local-video"></label></p>
+      <div style="margin-top:1.6rem">
+        <div class="seg" role="tablist" aria-label="Pitch structure" id="pseg">
+          <button role="tab" aria-selected="true" data-k="now">Now</button>
+          <button role="tab" aria-selected="false" data-k="past">Past</button>
+          <button role="tab" aria-selected="false" data-k="future">Future</button>
+        </div>
+        <p id="pitchtxt" class="fadein" style="margin-top:1.1rem;color:var(--ink);font-size:1.05rem"></p>
+      </div>
+    </div>
+
+    <div id="c-models" hidden style="margin-top:1.8rem">
+      <p class="meta" style="margin:0 0 1.2rem">Three engineers with unusual paths, studied from public sources: university pages and press releases. Each one points to a mobility option.</p>
+
+      <div class="acc open" id="m-sweden">
+        <button type="button" aria-expanded="true"><h3>Niklas Zennström</h3><span class="who">Engineer and entrepreneur · Uppsala University · Sweden</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="body"><div><div class="inner">
+          <ul class="steps">
+            <li><b>Uppsala University.</b> MSc in Engineering Physics and BSc in Business Administration.</li>
+            <li><b>Founder.</b> Co-founded technology companies including Kazaa, Skype and Joost.</li>
+            <li><b>Investor.</b> Runs Atomico, an investment firm for innovative IT companies.</li>
+            <li><b>Climate.</b> His foundation backs climate research, and he funded a ten-year visiting professorship in climate research at Uppsala. Named the university's Alumnus of the Year in 2015.</li>
+          </ul>
+          <div class="take"><h4>What I take from it</h4><p>A physics and engineering education can lead to building products used worldwide, then to investing and to climate action. His path mixes technical depth with initiative.</p>
+            <button class="mini" type="button" data-opt="sweden">See the Sweden option →</button></div>
+        </div></div></div>
+      </div>
+
+      <div class="acc" id="m-uk">
+        <button type="button" aria-expanded="false"><h3>Yoann Altmann</h3><span class="who">Professor · ENSEEIHT alumnus · Heriot-Watt University, UK</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="body"><div><div class="inner">
+          <ul class="steps">
+            <li><b>2010.</b> Engineering degree in electrical engineering from ENSEEIHT, and an MSc in Signal Processing from INP Toulouse.</li>
+            <li><b>2013.</b> PhD in the Signal and Communication Group of the IRIT laboratory in Toulouse.</li>
+            <li><b>2014 to 2017.</b> Postdoctoral researcher at Heriot-Watt University, UK, in the Institute of Sensors, Signals and Systems.</li>
+            <li><b>2017.</b> Royal Academy of Engineering Research Fellow and Assistant Professor. Professor since 2024.</li>
+          </ul>
+          <div class="take"><h4>What I take from it</h4><p>He studied at my own school and built an academic career in the UK, through a PhD in Toulouse and then a move abroad. He shows that an ENSEEIHT degree opens British research positions.</p>
+            <button class="mini" type="button" data-opt="uk">See the UK option →</button></div>
+        </div></div></div>
+      </div>
+
+      <div class="acc" id="m-canada">
+        <button type="button" aria-expanded="false"><h3>Frédéric Montagnon</h3><span class="who">Entrepreneur · ENSEEIHT graduate · New York</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="body"><div><div class="inner">
+          <ul class="steps">
+            <li><b>ENSEEIHT, Toulouse.</b> Master's degree in microelectronics and electronics.</li>
+            <li><b>2003 to 2004.</b> Launched Codanova, which made MIDI controllers for DJs, then moved to New York and founded OverBlog, a blog-creation platform that he ran until 2014.</li>
+            <li><b>2007.</b> Founded Nomao, a platform to discover and locate places, acquired by Teads in 2010.</li>
+            <li><b>2017.</b> Co-founded Legolas Exchange (now LGO), a crypto exchange, and Arianee, a non-profit that uses blockchain to certify authenticity.</li>
+          </ul>
+          <div class="take"><h4>What I take from it</h4><p>An ENSEEIHT electronics graduate who built web products from scratch, crossed the Atlantic to do it and kept starting new ventures. It is the spirit I want: go abroad, learn fast and build.</p>
+            <button class="mini" type="button" data-opt="canada">See the Canada option →</button></div>
+        </div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap">© 2026 Omar Tabti · Toulouse INP–ENSEEIHT</div></footer>
+
+<script>
+const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const css=getComputedStyle(document.documentElement),C=k=>css.getPropertyValue(k).trim();
+const NS='http://www.w3.org/2000/svg',$=id=>document.getElementById(id);
+function S(p,t,a,txt){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;p.appendChild(e);return e}
+function swap(el){el.classList.remove('fadein');void el.offsetWidth;el.classList.add('fadein')}
+function seg(box,fn){const bs=[...box.querySelectorAll('button')];bs.forEach(b=>b.addEventListener('click',()=>pick(b.dataset.k)));
+  function pick(k){bs.forEach(b=>b.setAttribute('aria-selected',b.dataset.k===k));fn(k)}return pick}
+
+/* ---- Theme ---- */
+function setTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(e){}}
+try{const t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}
+$('theme').addEventListener('click',()=>setTheme((document.documentElement.dataset.theme||'dark')==='dark'?'light':'dark'));
+
+/* ---- Tabs ---- */
+const names=['welcome','engineering','mobility','sustainability','sport','career'];
+const tabs=names.map(n=>$('t-'+n)),ind=$('ind');
+function moveInd(){const t=tabs.find(b=>b.getAttribute('aria-selected')==='true');if(!t)return;ind.style.width=t.offsetWidth+'px';ind.style.transform=`translateX(${t.offsetLeft}px)`}
+function show(n,focus){
+  if(!names.includes(n))n='welcome';
+  names.forEach(k=>{const on=k===n,t=$('t-'+k),p=$('p-'+k);p.hidden=!on;p.classList.remove('enter');
+    t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;if(on){void p.offsetWidth;p.classList.add('enter');t.scrollIntoView({block:'nearest',inline:'nearest'})}});
+  moveInd();if(focus)$('t-'+n).focus();
+  if(location.hash!=='#'+n)history.replaceState(null,'','#'+n);
+  window.scrollTo(0,0);
+  if(n==='welcome')netResize();
+  if(n==='engineering')pvBuild(true);
+}
+tabs.forEach((t,i)=>{t.addEventListener('click',()=>show(names[i]));
+  t.addEventListener('keydown',e=>{const d={ArrowRight:1,ArrowLeft:-1}[e.key];if(d){e.preventDefault();show(names[(i+d+names.length)%names.length],true)}})});
+document.querySelectorAll('[data-go]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();show(a.dataset.go)}));
+addEventListener('hashchange',()=>show(location.hash.slice(1)));
+addEventListener('resize',moveInd);
+
+/* ---- Neural network (welcome) ---- */
+const cv=$('net'),ctx=cv.getContext('2d'),layers=[3,5,5,2];let nodes=[],edges=[],pulses=[],W=0,H=0;
+function netResize(){
+  const r=cv.getBoundingClientRect();if(!r.width)return;
+  const d=Math.min(devicePixelRatio||1,2);W=r.width;H=r.height;cv.width=W*d;cv.height=H*d;ctx.setTransform(d,0,0,d,0,0);
+  const gap=Math.min(52,(H-40)/5);
+  nodes=layers.map((n,l)=>Array.from({length:n},(_,i)=>({x:14+l*(W-28)/(layers.length-1),y:H/2+(i-(n-1)/2)*gap})));
+  pulses=[];edges=[];for(let l=0;l<layers.length-1;l++)for(const a of nodes[l])for(const b of nodes[l+1])edges.push({a,b,l});
+  drawNet();
+}
+function drawNet(){
+  const line=C('--line'),bg=C('--bg'),ac=C('--accent'),wm=C('--warm');
+  ctx.clearRect(0,0,W,H);ctx.lineWidth=1;ctx.strokeStyle=line;
+  for(const e of edges){ctx.beginPath();ctx.moveTo(e.a.x,e.a.y);ctx.lineTo(e.b.x,e.b.y);ctx.stroke()}
+  for(const p of pulses){const x=p.e.a.x+(p.e.b.x-p.e.a.x)*p.t,y=p.e.a.y+(p.e.b.y-p.e.a.y)*p.t;
+    ctx.globalAlpha=.9;ctx.fillStyle=wm;ctx.beginPath();ctx.arc(x,y,3.2,0,7);ctx.fill();ctx.globalAlpha=.25;ctx.beginPath();ctx.arc(x,y,8,0,7);ctx.fill();ctx.globalAlpha=1}
+  for(const col of nodes)for(const n of col){ctx.beginPath();ctx.arc(n.x,n.y,5.5,0,7);ctx.fillStyle=bg;ctx.fill();ctx.lineWidth=1.8;ctx.strokeStyle=ac;ctx.stroke()}
+}
+let last=0;
+function loop(t){
+  const dt=Math.min((t-last)/1000,.05);last=t;
+  if(!$('p-welcome').hidden&&edges.length){
+    if(Math.random()<dt*5&&pulses.length<10){const c=edges.filter(e=>e.l===0);pulses.push({e:c[Math.floor(Math.random()*c.length)],t:0})}
+    for(const p of pulses)p.t+=dt*.7;
+    for(let i=pulses.length-1;i>=0;i--){const p=pulses[i];if(p.t>=1){const nx=edges.filter(e=>e.a===p.e.b);
+      if(nx.length&&Math.random()<.85)pulses.push({e:nx[Math.floor(Math.random()*nx.length)],t:0});pulses.splice(i,1)}}
+    drawNet();
+  }
+  requestAnimationFrame(loop);
+}
+addEventListener('resize',netResize);
+if(!still)requestAnimationFrame(loop);
+
+/* ---- Stirling cycle, P = T/V, with sliders ---- */
+const pv=$('pv'),X0=52,X1=402,Y0=226,Y1=20,V0=.6,V1=3.4,Va=1,Vb=3;
+const px=v=>X0+(v-V0)/(V1-V0)*(X1-X0),py=(T)=>Y0-(T/1000)/1.05*(Y0-Y1);
+const iso=(T,a,b)=>{let d='';for(let i=0;i<=40;i++){const v=a+(b-a)*i/40;d+=(i?'L':'M')+px(v).toFixed(1)+' '+py(T/v).toFixed(1)}return d};
+S(pv,'path',{class:'ax',d:`M${X0} ${Y1-6}V${Y0}H${X1+8}`});
+S(pv,'text',{x:X1,y:Y0+34,'text-anchor':'end'},'Volume');S(pv,'text',{x:X0-8,y:Y1-8},'Pressure');
+S(pv,'text',{x:px(Va),y:Y0+16,'text-anchor':'middle'},'V min');S(pv,'text',{x:px(Vb),y:Y0+16,'text-anchor':'middle'},'V max');
+const area=S(pv,'path',{class:'area'}),ghost=S(pv,'path',{class:'ghost'}),trace=S(pv,'path',{class:'trace'}),dot=S(pv,'circle',{class:'dot',r:5});
+const lh=S(pv,'text',{}),lc=S(pv,'text',{});
+let plen=0,praf;
+function place(f){if(!plen)return;trace.style.strokeDasharray=plen;trace.style.strokeDashoffset=plen*(1-f);const p=trace.getPointAtLength(plen*f);dot.setAttribute('cx',p.x);dot.setAttribute('cy',p.y)}
+function pvBuild(animate){
+  const Th=+$('th').value,Tc=+$('tc').value;$('thv').textContent=Th+' K';$('tcv').textContent=Tc+' K';
+  const cyc=iso(Th,Va,Vb)+`L${px(Vb)} ${py(Tc/Vb)}`+iso(Tc,Vb,Va).replace('M','L')+`L${px(Va)} ${py(Th/Va)}Z`;
+  [area,ghost,trace].forEach(e=>e.setAttribute('d',cyc));
+  lh.setAttribute('x',px(1.8));lh.setAttribute('y',py(Th/1.8)-9);lh.textContent='hot isotherm';
+  lc.setAttribute('x',px(1.9));lc.setAttribute('y',py(Tc/1.9)+20);lc.textContent='cold isotherm';
+  $('eta').innerHTML=`Carnot limit: ${(100*(1-Tc/Th)).toFixed(0)} %<small>η = 1 − T<sub>c</sub>/T<sub>h</sub>. The shaded area is the work per cycle.</small>`;
+  plen=trace.getTotalLength();if(animate)pvPlay();else place(1);
+}
+function pvPlay(){cancelAnimationFrame(praf);if(still||!plen){place(1);return}const t0=performance.now(),D=3200;
+  (function s(t){const f=Math.min((t-t0)/D,1);place(1-Math.pow(1-f,2));if(f<1)praf=requestAnimationFrame(s)})(t0)}
+$('th').addEventListener('input',()=>pvBuild(false));$('tc').addEventListener('input',()=>pvBuild(false));$('pvplay').addEventListener('click',pvPlay);
+
+/* ---- Flettner rotor ---- */
+const fl=$('fl');
+const wind=S(fl,'g',{class:'wind'});[50,95,155,200].forEach(y=>S(wind,'line',{x1:20,x2:140,y1:y,y2:y}));
+S(fl,'text',{x:20,y:28},'wind');
+const rot=S(fl,'g',{});
+S(rot,'circle',{cx:210,cy:125,r:36,fill:'none',stroke:'var(--accent)','stroke-width':2.4});
+const sp=S(rot,'g',{class:'spin'});S(sp,'path',{d:'M210 125V93M210 125L238 141M210 125L182 141',stroke:'var(--accent)','stroke-width':2.2,fill:'none','stroke-linecap':'round'});
+const arrow=S(fl,'path',{stroke:'var(--warm)','stroke-width':3,fill:'none','stroke-linecap':'round','stroke-linejoin':'round'});
+const alab=S(fl,'text',{x:228,y:20,style:'fill:var(--warm)'},'Magnus force');
+function flSet(){
+  const a=+$('spin').value;$('spinv').textContent=a.toFixed(1);
+  const L=a===0?0:14+78*(1-Math.exp(-a/1.4)),y0=86;
+  arrow.setAttribute('d',L?`M210 ${y0}V${y0-L}M200 ${y0-L+10}L210 ${y0-L}L220 ${y0-L+10}`:'');
+  alab.setAttribute('y',Math.max(14,y0-L-8));
+  sp.style.animationDuration=(a?(4/a).toFixed(2):1)+'s';sp.style.animationPlayState=a?'running':'paused';
+}
+$('spin').addEventListener('input',flSet);flSet();
+const tipePick=seg($('tipe'),k=>{$('tipe-stirling').hidden=k!=='stirling';$('tipe-flettner').hidden=k!=='flettner';
+  const el=$('tipe-'+k);swap(el);if(k==='stirling')pvBuild(true)});
+
+/* ---- Mobility ---- */
+const prof={sweden:['Niklas Zennström','Uppsala University, Sweden'],uk:['Yoann Altmann','ENSEEIHT alumnus, Heriot-Watt University, UK'],canada:['Frédéric Montagnon','ENSEEIHT graduate, entrepreneur in New York']};
+const mPick=seg($('mseg'),k=>{['sweden','uk','canada'].forEach(o=>$('opt-'+o).hidden=o!==k);swap($('opt-'+k));
+  $('linked').innerHTML=`<span>Linked profile</span><strong style="font-family:var(--serif);font-size:1.25rem;font-weight:400">${prof[k][0]}</strong><span>${prof[k][1]}</span>`;
+  const b=document.createElement('button');b.className='btn';b.type='button';b.textContent='Read the analysis';b.onclick=()=>{show('career');cPick('models');openModel(k)};$('linked').appendChild(b)});
+mPick('sweden');
+document.querySelectorAll('[data-opt]').forEach(b=>b.addEventListener('click',()=>{show('mobility');mPick(b.dataset.opt)}));
+
+/* ---- Sustainability ---- */
+const SD=[['No poverty','#E5243B'],['Zero hunger','#DDA63A'],['Good health','#4C9F38'],['Quality education','#C5192D'],['Gender equality','#FF3A21'],['Clean water','#26BDE2'],['Clean energy','#FCC30B'],['Decent work','#A21942'],['Industry, innovation','#FD6925'],['Reduced inequalities','#DD1367'],['Sustainable cities','#FD9D24'],['Responsible consumption','#BF8B2E'],['Climate action','#3F7E44'],['Life below water','#0A97D9'],['Life on land','#56C02B'],['Peace, justice','#00689D'],['Partnerships','#19486A']];
+const ACT={13:['Climate Fresk','Climate Action','A collaborative workshop based on the IPCC reports. We mapped the causes and consequences of climate change and discussed decarbonisation strategies for engineers. It changed how I read the numbers behind the climate debate.'],
+  4:['Volunteer tutor, 2024 to 2026','Quality Education','I helped final-year high-school students prepare for their exams on online community servers: I led exercise sessions, explained difficult concepts clearly and shared exam methods. Explaining is the best way I know to check that I understand.'],
+  5:['“Le Procès de King Kong”','Gender Equality','I attended and reflected on an awareness play about sexist and sexual violence, consent and gender equality in higher education and at work. It is a reminder that a good engineering team also depends on how people treat each other.']};
+const sg=$('sdg');
+SD.forEach(([n,c],i)=>{const b=document.createElement('button');b.type='button';b.style.background=c;b.dataset.n=i+1;b.tabIndex=ACT[i+1]?0:-1;if(ACT[i+1])b.classList.add('on');b.setAttribute('aria-label','Goal '+(i+1)+', '+n);b.innerHTML=(i+1)+'<small>'+n+'</small>';sg.appendChild(b)});
+function pickSdg(n){
+  sg.querySelectorAll('button').forEach(b=>b.classList.toggle('sel',+b.dataset.n===+n));
+  document.querySelectorAll('#acts button').forEach(b=>b.setAttribute('aria-selected',+b.dataset.sdg===+n));
+  const a=ACT[n];if(!a)return;$('detail').innerHTML=`<span class="tag">SDG ${n} · ${a[1]}</span><h3 style="margin-bottom:.7rem">${a[0]}</h3><p>${a[2]}</p>`;swap($('detail'));
+}
+sg.addEventListener('click',e=>{const b=e.target.closest('button.on');if(b)pickSdg(b.dataset.n)});
+document.querySelectorAll('#acts button').forEach(b=>b.addEventListener('click',()=>pickSdg(b.dataset.sdg)));
+pickSdg(13);
+
+/* ---- Sport cards ---- */
+document.querySelectorAll('.sp').forEach(b=>b.addEventListener('click',()=>b.setAttribute('aria-expanded',b.getAttribute('aria-expanded')!=='true')));
+
+/* ---- Career ---- */
+const cPick=seg($('cseg'),k=>{['brand','docs','models'].forEach(o=>$('c-'+o).hidden=o!==k);swap($('c-'+k))});
+const PT={now:'First-year engineering student in Digital Sciences at ENSEEIHT, heading for High-Performance Computing and Big Data.',
+  past:'Two years of PCSI and PSI* preparatory classes, TIPE research on Stirling engine optimisation and Flettner rotors, and two years as a volunteer tutor.',
+  future:'A strong wish to go abroad to gain knowledge and experience, through internships and an international mobility, then to bring it back to AI and quantitative analysis.'};
+seg($('pseg'),k=>{$('pitchtxt').textContent=PT[k];swap($('pitchtxt'))})('now');
+function openModel(k){document.querySelectorAll('.acc').forEach(a=>{const on=a.id==='m-'+k;a.classList.toggle('open',on);a.querySelector('button').setAttribute('aria-expanded',on)})}
+document.querySelectorAll('.acc>button').forEach(b=>b.addEventListener('click',()=>{const a=b.parentElement;const was=a.classList.contains('open');
+  document.querySelectorAll('.acc').forEach(x=>{x.classList.remove('open');x.querySelector('button').setAttribute('aria-expanded','false')});
+  if(!was){a.classList.add('open');b.setAttribute('aria-expanded','true')}}));
+$('local-video').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;
+  const v=$('pitch-video');v.src=URL.createObjectURL(f);v.hidden=false;$('vph').hidden=true;v.load()});
+
+show(location.hash.slice(1)||'welcome');
+</script>
+
+</body></html>
