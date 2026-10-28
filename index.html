@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html lang="en"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Omar Tabti e-Portfolio</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -487,7 +487,7 @@ footer{border-top:1px solid var(--line);padding-block:1.5rem 2rem;font-size:.82r
       <div class="grid">
         <div class="card"><p class="eyebrow">Product</p><h3>What I bring</h3><p>A solid base in mathematics, probability and numerical modelling, with real practice in Python and C, and two research projects behind it.</p></div>
         <div class="card"><p class="eyebrow">Brand</p><h3>How people describe me</h3><p>Rigorous, curious, multilingual.</p></div>
-        <div class="card"><p class="eyebrow">Value proposition</p><h3>What makes me different</h3><p>I turn mathematical and numerical models into working code, and I can do it in five languages, which suits international teams.</p></div>
+        <div class="card"><p class="eyebrow">Value proposition</p><h3>What makes me different</h3><p>I turn mathematical and numerical models into working code, and I can do it in four languages, which suits international teams.</p></div>
       </div>
     </div>
 
@@ -501,7 +501,6 @@ footer{border-top:1px solid var(--line);padding-block:1.5rem 2rem;font-size:.82r
       <p class="meta" style="margin-top:.9rem">Contact: omartabtiahaddouch44@gmail.com</p>
       <p class="sub">Elevator pitch</p>
       <div class="video"><span id="vph">Pitch video, 2 to 3 minutes, in English</span><video id="pitch-video" controls preload="metadata" aria-label="Elevator pitch video" hidden><source src="pitch.mp4" type="video/mp4"></video></div>
-      <p style="margin:.7rem 0 0"><label class="file">Preview a local video file<input type="file" accept="video/*" hidden id="local-video"></label></p>
       <div style="margin-top:1.6rem">
         <div class="seg" role="tablist" aria-label="Pitch structure" id="pseg">
           <button role="tab" aria-selected="true" data-k="now">Now</button>
@@ -715,8 +714,8 @@ function openModel(k){document.querySelectorAll('.acc').forEach(a=>{const on=a.i
 document.querySelectorAll('.acc>button').forEach(b=>b.addEventListener('click',()=>{const a=b.parentElement;const was=a.classList.contains('open');
   document.querySelectorAll('.acc').forEach(x=>{x.classList.remove('open');x.querySelector('button').setAttribute('aria-expanded','false')});
   if(!was){a.classList.add('open');b.setAttribute('aria-expanded','true')}}));
-$('local-video').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;
-  const v=$('pitch-video');v.src=URL.createObjectURL(f);v.hidden=false;$('vph').hidden=true;v.load()});
+(function(){const v=$('pitch-video'),ok=()=>{v.hidden=false;$('vph').hidden=true};
+  v.addEventListener('loadedmetadata',ok);if(v.readyState>=1)ok();else v.load()})();
 
 show(location.hash.slice(1)||'welcome');
 </script>
